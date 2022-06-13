@@ -38,6 +38,8 @@ public class ManagerProduct {
         System.out.println("6. Hiển thị sản phẩm có trong cửa hàng");
         System.out.println("7. Logout");
         System.out.println("8. Thoát");
+        System.out.println("-----------------------");
+        System.out.println("chọn chức năng");
 
         int choice = Integer.parseInt(scanner.nextLine());
         switch (choice) {
@@ -85,13 +87,14 @@ public class ManagerProduct {
     public void addProduct(Product product) {
         products.add(product);
 
-
 //        editSellAmount();
 //        products.add(creatProduct());
 //        readAndWriteProduct.writeProduct(products);
     }
 
-    public Product editSellAmount() {
+    public void editSellAmount() {
+        products=readAndWriteProduct.readProduct();
+        readAndWriteSellProduct.readFileSellProduct(sellProducts);
         for (int i = 0; i < products.size(); i++) {
             double sum = 0;
             for (int j = 0; j < sellProducts.size(); j++) {
@@ -103,7 +106,8 @@ public class ManagerProduct {
             }
             System.out.println(sum);
         }
-        return null;
+        readAndWriteProduct.writeProduct(products);
+        readAndWriteSellProduct.writeSellProduct(sellProducts);
     }
     public void delete() {
         System.out.println("Nhập id cần xóa: ");
@@ -188,6 +192,8 @@ public class ManagerProduct {
         System.out.println("7. Xuất Bill");
         System.out.println("8. Logout");
         System.out.println("9. Thoát");
+        System.out.println("----------------------");
+        System.out.println(" Chọn chức năng");
 
         int choice = Integer.parseInt(scanner.nextLine());
         switch (choice) {
@@ -252,21 +258,24 @@ public class ManagerProduct {
     }
 
     public void editSellProduct() {
-
+        SellProduct billproduct = null;
         int id = validateProduct.validateInt(products);
         double amount = validateProduct.validateDouble("amount: ");
         for (int i = 0; i < bills.size(); i++) {
             if ((products.get(i).getId()==id)) {
-                for (int j = 0; j < sellProducts.size(); j++) {
-                    if ((products.get(i).getId()==id)) {
-                        sellProducts.get(j).setSellAmount(sellProducts.get(j).getSellAmount() - bills.get(i).getSellAmount() + amount);
+                billproduct = bills.get(i);
+                        bills.remove(i);
+            }
+
+            for (int j = 0; j < sellProducts.size(); j++) {
+                    if (billproduct.equals(sellProducts.get(j)))
+                    {sellProducts.remove(i);
                     }
                 }
-                bills.get(i).setSellAmount(amount);
             }
         }
-        readAndWriteBill.writeBill(bills);
-    }
+
+
     public void showProductforClient() {
         for (SellProduct st: sellProducts) {
             System.out.println(st);

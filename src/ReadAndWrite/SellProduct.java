@@ -38,10 +38,10 @@ public class SellProduct {
         int totalPrice = (int) totalPrice();
 
         return product.getId() +
-                "," + product.getName() +
-                "," + product.getPrice() +
-                "," + sellAmount +
-                "," + totalPrice ;
+                ", name" + product.getName() +
+                ", price" + product.getPrice() +
+                ", sellAmount" + sellAmount +
+                ", totalPrice" + totalPrice ;
     }
 
     public double totalPrice() {

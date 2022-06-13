@@ -21,6 +21,8 @@ public class ManagerLogin {
     public void manuLogin(){
         System.out.println("1. Login");
         System.out.println("2. Register");
+        System.out.println("----------------");
+        System.out.println(" Chọn chức năng");
         int choice=Integer.parseInt(scanner.nextLine());
         switch (choice){
             case 1:
